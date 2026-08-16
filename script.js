@@ -1,4 +1,5 @@
 (function () {
+  // Edite aqui para trocar o número/link do WhatsApp.
   const WHATSAPP_NUMBER = "5581985151099"; // (81) 98515-1099
 
   function buildWhatsappLink(message) {
@@ -6,11 +7,12 @@
   }
 
   const defaultMessage =
-    "Olá! Vim pelo site e gostaria de saber mais sobre os serviços de captação e edição.";
+    "Olá! Vim pelo site e gostaria de saber mais sobre os serviços de conteúdo.";
 
-  // Generic CTAs (header, avulso section, contact section, floating button)
+  // CTAs genéricos (header, header mobile, avulso, contato, botão flutuante)
   const genericLinks = [
     { el: document.getElementById("cta-header"), msg: defaultMessage },
+    { el: document.getElementById("cta-mobile"), msg: defaultMessage },
     { el: document.getElementById("cta-avulso"), msg: "Olá! Tenho fotos/vídeos prontos e gostaria de um orçamento para edição avulsa." },
     { el: document.getElementById("cta-final"), msg: defaultMessage },
     { el: document.getElementById("wpp-float"), msg: defaultMessage },
@@ -20,22 +22,40 @@
     if (el) el.href = buildWhatsappLink(msg);
   });
 
-  // Package cards
+  // Pacotes de captação + edição
   document.querySelectorAll(".wpp-pacote").forEach((btn) => {
     const pacote = btn.dataset.pacote;
     const detalhe = btn.dataset.detalhe;
-    const preco = btn.dataset.preco;
-    const message = `Olá! Quero contratar o ${pacote} (${detalhe}) por ${preco}.`;
+    const message = `Olá! Tenho interesse no ${pacote} (${detalhe}). Poderia me passar mais informações?`;
     btn.href = buildWhatsappLink(message);
   });
 
-  // Avulso price table rows
-  document.querySelectorAll(".wpp-avulso-item").forEach((row) => {
-    const item = row.dataset.item;
-    const preco = row.dataset.preco;
-    const message = `Olá! Gostaria de solicitar edição avulsa: ${item} — ${preco}.`;
-    row.addEventListener("click", () => {
+  // Itens de edição avulsa (clicáveis)
+  document.querySelectorAll(".wpp-avulso").forEach((item) => {
+    const label = item.dataset.item;
+    const message = `Olá! Tenho material pronto e gostaria de orçamento para edição avulsa: ${label}.`;
+    item.addEventListener("click", () => {
       window.open(buildWhatsappLink(message), "_blank", "noopener");
     });
   });
+
+  // Menu mobile
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileNav = document.getElementById("mobile-nav");
+
+  if (menuToggle && mobileNav) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("open");
+      menuToggle.classList.toggle("open", isOpen);
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    mobileNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+        menuToggle.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
 })();
