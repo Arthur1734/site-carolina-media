@@ -33,7 +33,8 @@
   // Itens de edição avulsa (clicáveis)
   document.querySelectorAll(".wpp-avulso").forEach((item) => {
     const label = item.dataset.item;
-    const message = `Olá! Tenho material pronto e gostaria de orçamento para edição avulsa: ${label}.`;
+    const preco = item.dataset.preco;
+    const message = `Olá! Tenho material pronto e gostaria de orçamento para edição avulsa: ${label} (${preco}).`;
     item.addEventListener("click", () => {
       window.open(buildWhatsappLink(message), "_blank", "noopener");
     });

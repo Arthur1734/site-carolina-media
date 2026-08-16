@@ -300,6 +300,15 @@ section { padding: 88px 0; }
 
 .price-row-label { font-size: 1rem; }
 
+.price-row-value {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.price-row-value small { font-family: var(--font-body); font-size: 0.7rem; color: var(--gray-600); }
+
 .avulso-note {
   font-weight: 600;
   margin-top: 8px;
@@ -381,6 +390,13 @@ section { padding: 88px 0; }
   gap: 9px;
   border-top: 1px solid var(--gray-100);
   padding-top: 20px;
+}
+
+.pacote-preco {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 500;
+  margin-bottom: 24px;
 }
 
 .pacote-btn { width: 100%; margin-top: auto; }
